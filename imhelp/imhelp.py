@@ -8,10 +8,6 @@ def c3_img_to_c1(I):
     b = I[:,:,1]
     c = I[:,:,2]
     
-    print("a", a)
-    print("b", b)
-    print("c", c)
-    
     Res = np.zeros((h, w), 'uint32')
     Res[:,:] = a
     Res = np.left_shift(Res, 8)
@@ -20,7 +16,6 @@ def c3_img_to_c1(I):
     Res = np.left_shift(Res, 8)
     
     Res[:,:] += c
-    #Res = np.left_shift(Res, 9)
     
     return Res
 
@@ -36,10 +31,6 @@ def c1_img_to_c3(I):
     
     I = np.right_shift(I, 8)
     I1 = I.astype('uint8')
-    #I1 = np.bitwise_and(I, mask)
     
-    print("A", I1)
-    print("B", I2)
-    print("C", I3)
-    
-    return np.array([I1, I2, I3], 'uint8')
+    Res = np.array([I1, I2, I3], 'uint8')
+    return np.moveaxis(Res, 0, 2)
