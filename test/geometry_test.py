@@ -45,11 +45,33 @@ class Testaabbmetry(unittest.TestCase):
         int_ab = aabb.intersection(A, A)
         self.assertEqual(int_ab, 10*10)
 
+    def test_union(self):
+        A = (0, 0, 10, 10)
+        B = (5, 0, 10, 10)
+        int_ab = aabb.union(A, B)
+        self.assertEqual(int_ab, 2*10*10 - 5*10)
+
+        A = (0, 0, 10, 10)
+        B = (15, 0, 10, 10)
+        int_ab = aabb.union(A, B)
+        self.assertEqual(int_ab, 2*10*10)
+
+        int_ab = aabb.union(A, A)
+        self.assertEqual(int_ab, 10*10)
+
     def test_iou(self):
         A = (0, 0, 10, 10)
         B = (5, 0, 10, 10)
+        self.assertEqual(aabb.IoU(A, B), 1/3, 0.000001)
 
-        #self.assertEqual(aabbmetry.IoU_aabb(A, B), 1/3)
+        A = (0, 0, 10, 10)
+        B = (15, 0, 10, 10)
+        self.assertEqual(aabb.IoU(A, B), 0, 0.000001)
+
+        A = (0, 0, 10, 10)
+        B = (3.33333333, 0, 10, 10)
+        self.assertTrue(aabb.IoU(A, B) > 0.49 and \
+            aabb.IoU(A, B) < 0.51)
 
 if __name__ == '__main__':
     unittest.main()

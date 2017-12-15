@@ -30,6 +30,13 @@ def intersection(bb1, bb2):
     h = topbb[1] + topbb[3] - bottombb[0]
     return max(0, w * h)
 
+def union(bb1, bb2):
+    """ Calculates the Union of two aabb's
+    """
+    _, _, w1, h1 = bb1
+    _, _, w2, h2 = bb2
+    return w1 * h1 + w2 * h2 - intersection(bb1, bb2)
+
 
 def IoU(bb1, bb2):
     """ Calculate the Intersection over Union
@@ -44,5 +51,6 @@ def IoU(bb1, bb2):
     x-------x
 
     """
-
-    return -1
+    I = intersection(bb1, bb2)
+    U = union(bb1, bb2)
+    return I/U
