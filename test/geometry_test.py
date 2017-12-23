@@ -60,6 +60,8 @@ class Testaabbmetry(unittest.TestCase):
         self.assertEqual(int_ab, 10*10)
 
     def test_fail_iou(self):
+        """ things that failed while using the library
+        """
         A = (1359, 413, 120, 362)
         B = (1255, 447, 33, 100)
         self.assertEqual(aabb.intersection(A, B), 0)
@@ -71,6 +73,19 @@ class Testaabbmetry(unittest.TestCase):
         self.assertEqual(aabb.intersection(A, B), 0)
 
         self.assertTrue(aabb.IoU(A, B) < 1)
+
+        A = (7, 5, 6, 5)
+        B = (5, 6, 10, 5)
+        I = aabb.intersection(A, B)
+        self.assertTrue(I > 0)
+
+
+        A = (1359, 413, 120, 362)
+        B = (1338.0, 418.0, 167.0, 379.0)
+
+        I = aabb.intersection(A, B)
+
+        self.assertTrue(aabb.IoU(A, B) > 0)
 
     def test_iou(self):
         A = (0, 0, 10, 10)

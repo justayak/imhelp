@@ -27,8 +27,9 @@ def intersection(bb1, bb2):
         topbb, bottombb = bb2, bb1
 
     w = max(leftbb[0] + leftbb[2] - rightbb[0], 0)
-    h = max(topbb[1] + topbb[3] - bottombb[0], 0)
+    h = max(topbb[1] + topbb[3] - bottombb[1], 0)
     return w * h
+
 
 def union(bb1, bb2):
     """ Calculates the Union of two aabb's
