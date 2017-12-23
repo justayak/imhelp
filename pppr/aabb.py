@@ -16,6 +16,8 @@ def is_inside(aabb, point):
 def intersection(bb1, bb2):
     """ Calculates the Intersection of two aabb's
     """
+    min_w = min(bb1[2], bb2[2])
+    min_h = min(bb1[3], bb2[3])
     if bb1[0] < bb2[0]:
         leftbb, rightbb = bb1, bb2
     else:
@@ -26,8 +28,8 @@ def intersection(bb1, bb2):
     else:
         topbb, bottombb = bb2, bb1
 
-    w = max(leftbb[0] + leftbb[2] - rightbb[0], 0)
-    h = max(topbb[1] + topbb[3] - bottombb[1], 0)
+    w = min(min_w, max(leftbb[0] + leftbb[2] - rightbb[0], 0))
+    h = min(min_h, max(topbb[1] + topbb[3] - bottombb[1], 0))
     return w * h
 
 

@@ -45,6 +45,11 @@ class Testaabbmetry(unittest.TestCase):
         int_ab = aabb.intersection(A, A)
         self.assertEqual(int_ab, 10*10)
 
+        A = (5, 0, 5, 15)
+        B = (0, 5, 15, 5)
+        I = aabb.intersection(A, B)
+        self.assertEqual(I, 5*5)
+
     def test_union(self):
         A = (0, 0, 10, 10)
         B = (5, 0, 10, 10)
