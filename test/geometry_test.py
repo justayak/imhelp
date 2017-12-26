@@ -1,5 +1,6 @@
 import unittest
 import sys
+from math import sqrt
 sys.path.insert(0,'../')
 
 from pppr import aabb
@@ -105,6 +106,26 @@ class Testaabbmetry(unittest.TestCase):
         B = (3.33333333, 0, 10, 10)
         self.assertTrue(aabb.IoU(A, B) > 0.49 and \
             aabb.IoU(A, B) < 0.51)
+
+
+    def test_distance(self):
+        A = (0, 0, 10, 10)
+        B = (10, 0, 10, 10)
+        self.assertEqual(aabb.dist(A, B), 10)
+        self.assertEqual(aabb.dist(B, A), 10)
+
+        A = (0, 0, 10, 10)
+        B = (0, 10, 10, 10)
+        self.assertEqual(aabb.dist(A, B), 10)
+        self.assertEqual(aabb.dist(B, A), 10)
+
+        A = (10, 10, 5, 5)
+        B = (5, 5, 5, 5)
+        self.assertEqual(aabb.dist(A, B), sqrt(5**2 + 5**2))
+        self.assertEqual(aabb.dist(A, A), 0)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

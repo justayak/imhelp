@@ -1,4 +1,13 @@
 import numpy as np
+from math import sqrt
+
+def dist(bb1, bb2):
+    x1, y1, w1, h1 = bb1
+    x2, y2, w2, h2 = bb2
+
+    X1, Y1 = x1 + w1/2, y1 + h1/2
+    X2, Y2 = x2 + w2/2, y2 + h2/2
+    return sqrt((X1 - X2)**2 + (Y1 - Y2)**2)
 
 def is_inside(aabb, point):
     """ tests if a point is inside an aabb
